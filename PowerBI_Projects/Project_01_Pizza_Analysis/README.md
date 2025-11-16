@@ -99,9 +99,10 @@ IF(
 
 To calculate the average time gap between consecutive orders:
 - Duplicate Table → Copy data_pizza and rename it PreviousOrder.
+- Remove duplicate order ID 
 - Add Index Column → Add sequential index columns in both tables.
 - Shift Index → In PreviousOrder, create a column Index Prev + 1 = [Index Prev] + 1 to align each order with its previous one.
-- Merge Tables → Merge data_pizza[Index] with PreviousOrder[Index Prev + 1] to bring in PrevOrderDateTime.
+- Merge Tables → Merge data_pizza[Index] (after removed duplicate order ID) with PreviousOrder[Index Prev + 1] to bring in PrevOrderDateTime.
 - Calculate Time Difference → Add a custom column:
 ```
 = Duration.TotalMinutes([OrderDateTime] - [PrevOrderDateTime])
